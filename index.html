@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bake With Mommy Menu</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: linear-gradient(135deg, #fff4e6, #ffe9cc);
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    .main-container {
+      background: white;
+      border: 8px solid #f9dcc4;
+      border-radius: 2rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      padding: 3rem 2rem;
+      max-width: 1200px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .cookie-card:hover {
+      transform: scale(1.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .modal {
+      background: rgba(0, 0, 0, 0.4);
+    }
+
+    .fade-in {
+      animation: fadeIn 0.3s ease-out forwards;
+    }
+
+    .fade-out {
+      animation: fadeOut 0.2s ease-in forwards;
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes fadeOut {
+      0% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="main-container">
+    <h1 class="text-5xl font-extrabold mb-2 text-brown-900">🍪 Bake With Mommy 🍪</h1>
+    <h2 class="text-2xl font-semibold mb-8 text-gray-700">Our Delicious Cookie Menu</h2>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-10">
+
+      <!-- Cookie Cards -->
+      <div class="flex flex-col items-center cursor-pointer cookie-card" onclick="openModal('Triple Chocolate', '$4.00', 'https://via.placeholder.com/150', event)">
+        <img src="https://via.placeholder.com/150" alt="Triple Chocolate" class="rounded-full w-36 h-36 object-cover shadow-md mb-3 border-4 border-white">
+        <p class="text-center font-semibold text-gray-800">Triple Chocolate</p>
+      </div>
+
+      <div class="flex flex-col items-center cursor-pointer cookie-card" onclick="openModal('White Chocolate Macadamia', '$4.50', 'https://via.placeholder.com/150', event)">
+        <img src="https://via.placeholder.com/150" alt="White Chocolate Macadamia" class="rounded-full w-36 h-36 object-cover shadow-md mb-3 border-4 border-white">
+        <p class="text-center font-semibold text-gray-800">White Chocolate Macadamia</p>
+      </div>
+
+      <div class="flex flex-col items-center cursor-pointer cookie-card" onclick="openModal('Banana Cream Pie', '$4.25', 'https://via.placeholder.com/150', event)">
+        <img src="https://via.placeholder.com/150" alt="Banana Cream Pie" class="rounded-full w-36 h-36 object-cover shadow-md mb-3 border-4 border-white">
+        <p class="text-center font-semibold text-gray-800">Banana Cream Pie</p>
+      </div>
+
+      <div class="flex flex-col items-center cursor-pointer cookie-card" onclick="openModal('Cookie Butter with Biscoff', '$5.00', 'https://via.placeholder.com/150', event)">
+        <img src="https://via.placeholder.com/150" alt="Cookie Butter with Biscoff" class="rounded-full w-36 h-36 object-cover shadow-md mb-3 border-4 border-white">
+        <p class="text-center font-semibold text-gray-800">Cookie Butter with Biscoff</p>
+      </div>
+
+      <div class="flex flex-col items-center cursor-pointer cookie-card" onclick="openModal('Chocolate Chip', '$3.75', 'https://via.placeholder.com/150', event)">
+        <img src="https://via.placeholder.com/150" alt="Chocolate Chip" class="rounded-full w-36 h-36 object-cover shadow-md mb-3 border-4 border-white">
+        <p class="text-center font-semibold text-gray-800">Chocolate Chip</p>
+      </div>
+
+      <div class="flex flex-col items-center cursor-pointer cookie-card" onclick="openModal('S\'mores', '$4.75', 'https://via.placeholder.com/150', event)">
+        <img src="https://via.placeholder.com/150" alt="S'mores" class="rounded-full w-36 h-36 object-cover shadow-md mb-3 border-4 border-white">
+        <p class="text-center font-semibold text-gray-800">S'mores</p>
+      </div>
+
+      <div class="flex flex-col items-center cursor-pointer cookie-card" onclick="openModal('Confetti', '$4.00', 'https://via.placeholder.com/150', event)">
+        <img src="https://via.placeholder.com/150" alt="Confetti" class="rounded-full w-36 h-36 object-cover shadow-md mb-3 border-4 border-white">
+        <p class="text-center font-semibold text-gray-800">Confetti</p>
+      </div>
+
+      <div class="flex flex-col items-center cursor-pointer cookie-card" onclick="openModal('Cookies N\' Cream', '$5.25', 'cookie.png', event)">
+        <img src="cookie.png" alt="Cookies N' Cream" class="rounded-full w-36 h-36 object-cover shadow-md mb-3 border-4 border-white">
+        <p class="text-center font-semibold text-gray-800">Cookies N' Cream</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div id="priceModal" class="hidden fixed inset-0 flex justify-center items-center modal z-50">
+    <div id="modalBox" class="relative bg-gradient-to-br from-yellow-100 to-orange-200 rounded-2xl p-8 text-center shadow-2xl w-80 opacity-0 scale-95 border-4 border-yellow-300">
+      <button onclick="closeModal()" class="absolute top-3 right-4 text-gray-500 hover:text-gray-800 text-3xl font-bold">&times;</button>
+      <div class="flex flex-col items-center">
+        <img id="modalCookieImage" src="" alt="Cookie Image" class="rounded-full w-24 h-24 object-cover mb-4 border-4 border-white shadow-md">
+        <h3 id="modalCookieName" class="text-3xl font-extrabold mb-2 text-brown-800"></h3>
+        <p id="modalCookiePrice" class="text-xl text-gray-700"></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openModal(name, price, imageUrl, event) {
+      event.stopPropagation();
+      const modal = document.getElementById('priceModal');
+      const modalBox = document.getElementById('modalBox');
+      document.getElementById('modalCookieName').textContent = name;
+      document.getElementById('modalCookiePrice').textContent = 'Price: ' + price;
+      document.getElementById('modalCookieImage').src = imageUrl;
+
+      modal.classList.remove('hidden');
+      modalBox.classList.remove('fade-out');
+      modalBox.classList.add('fade-in');
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('priceModal');
+      const modalBox = document.getElementById('modalBox');
+      modalBox.classList.remove('fade-in');
+      modalBox.classList.add('fade-out');
+
+      setTimeout(() => {
+        modal.classList.add('hidden');
+      }, 200);
+    }
+
+    window.addEventListener('click', function (event) {
+      const modal = document.getElementById('priceModal');
+      const modalBox = document.getElementById('modalBox');
+      if (!modal.classList.contains('hidden') && !modalBox.contains(event.target)) {
+        closeModal();
+      }
+    });
+  </script>
+
+</body>
+
+</html>
